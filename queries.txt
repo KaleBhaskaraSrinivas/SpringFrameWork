@@ -1,0 +1,65 @@
+CREATE TABLE specialization (
+    specializationid SERIAL PRIMARY KEY,
+    specializationname TEXT
+);
+INSERT INTO specialization (specializationname) VALUES
+    ('Cardiology'),
+    ('Neurology'),
+    ('Orthopedics'),
+    ('Ophthalmology'),
+    ('Dermatology');
+CREATE TABLE doctor (
+    doctorid SERIAL PRIMARY KEY,
+    fullname TEXT,
+    specializationid INT REFERENCES specialization(specializationid),
+    qualification TEXT,
+    experience SMALLINT
+);
+INSERT INTO doctor (fullname, specializationid, qualification, experience) VALUES
+    ('Dr. John Smith', 1, 'MD Cardiology', 10),
+    ('Dr. Jane Doe', 2, 'MD Neurology', 8),
+    ('Dr. Michael Johnson', 3, 'MD Orthopedics', 15),
+    ('Dr. Emily Williams', 4, 'MD Ophthalmology', 5),
+    ('Dr. David Brown', 5, 'MD Dermatology', 12);
+CREATE TABLE patients_venu (
+    patientid SERIAL PRIMARY KEY,
+    patientname TEXT,
+    patientage SMALLINT,
+    patientgender TEXT,
+    patientmobile INT
+);
+CREATE TABLE appointments_venu (
+    appointmentid SERIAL PRIMARY KEY,
+    appointmentbookeddate DATE,
+    appointmentactualdate DATE,
+    appointmentdoctorid INT REFERENCES doctor(doctorid),
+    appointmentpatientid INT REFERENCES patients_venu(patientid),
+    appointmentslotfrom TIME,
+    appointmentslotto TIME,
+    appointmentstatus TEXT
+);
+CREATE TABLE doctorschedule_bhaskar (
+    doctorid INT,
+    doctorslotindex SMALLINT,
+    PRIMARY KEY (doctorid, doctorslotindex),
+    FOREIGN KEY (doctorid) REFERENCES doctor(doctorid),
+    doctorschedule TEXT,
+    doctoravailablefrom TIME,
+    doctoravailableto TIME,
+    doctoravailableslot SMALLINT
+);
+INSERT INTO doctorschedule_bhaskar (doctorid, doctorslotindex, doctorschedule, doctoravailablefrom, doctoravailableto, doctoravailableslot) VALUES
+    (1, 1, '135', '09:00', '12:00', 15),
+    (1, 2, '246', '14:00', '17:00', 30),
+    (2, 1, '135', '10:00', '13:00', 15),
+    (2, 2, '246', '15:00', '18:00', 30),
+    (3, 1, '146', '08:00', '11:00', 15);
+
+CREATE TABLE AppointmentsSlotCalendar (
+    slotid SERIAL PRIMARY KEY,
+    slotdoctorid INT REFERENCES doctor(doctorid),
+    slotdate DATE,
+    slotfrom TIME,
+    slotto TIME,
+    slotstatus TEXT
+);
