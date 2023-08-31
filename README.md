@@ -38,3 +38,27 @@ $$ LANGUAGE plpgsql;
 
 
 SELECT create_slots_for_doctor(1, '2023-08-31');
+
+
+DO $$ 
+DECLARE
+    doctor_id INT;
+    start_date DATE := CURRENT_DATE;
+    end_date DATE := CURRENT_DATE + INTERVAL '30 days';
+BEGIN
+    -- Loop through each doctor
+    FOR doctor_id IN 1..10 LOOP
+        -- Loop through each date in the range
+        WHILE start_date <= end_date LOOP
+            -- Call the function for each doctor and date
+            EXECUTE 'SELECT create_slots_for_doctor(' || doctor_id || ', ''' || start_date || ''')';
+
+            -- Move to the next day
+            start_date := start_date + INTERVAL '1 day';
+        END LOOP;
+        
+        -- Reset start_date for the next doctor
+        start_date := CURRENT_DATE;
+    END LOOP;
+END $$;
+select * from AppointmentsSlotCalendar
