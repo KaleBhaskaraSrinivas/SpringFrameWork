@@ -35,3 +35,6 @@ BEGIN
     END LOOP;
 END;
 $$ LANGUAGE plpgsql;
+
+
+SELECT create_slots_for_doctor(1, '2023-08-31');
