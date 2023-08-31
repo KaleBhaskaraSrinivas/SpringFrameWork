@@ -41,3 +41,73 @@ so slots must be created from doctoravailablefrom to doctoravailableto with the 
 for example doctoravailableslot is 15 then 12 slot entries will be in table 2 for doctor with id 1 
 
 create a postgresql function to do the above which will take date input and perform the above task
+
+
+
+
+
+
+
+
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
+
+public class SlotInsertion {
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:postgresql://localhost:5432/your_database"; // Update with your DB URL
+        String username = "your_username";
+        String password = "your_password";
+
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            String selectQuery = "SELECT * FROM table1";
+            PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int doctorId = resultSet.getInt("doctorid");
+                int availableSlot = resultSet.getInt("doctoravailableslot");
+                String schedule = resultSet.getString("doctorschedule");
+                LocalTime fromTime = LocalTime.parse(resultSet.getString("doctoravailablefrom"));
+                LocalTime toTime = LocalTime.parse(resultSet.getString("doctoravailableto"));
+
+                LocalDate currentDate = LocalDate.now();
+                DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+                int currentDayValue = currentDayOfWeek.getValue();
+
+                if (isDayInSchedule(schedule, currentDayValue)) {
+                    for (LocalTime currentTime = fromTime; currentTime.isBefore(toTime); currentTime = currentTime.plusMinutes(availableSlot)) {
+                        LocalTime slotToTime = currentTime.plusMinutes(availableSlot);
+                        int slotStatus = 1; // Available
+
+                        String insertQuery = "INSERT INTO table2 (slotdoctorid, slotdate, slotfrom, slotto, slotstatus) VALUES (?, ?, ?, ?, ?)";
+                        PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+                        insertStatement.setInt(1, doctorId);
+                        insertStatement.setDate(2, java.sql.Date.valueOf(currentDate));
+                        insertStatement.setTime(3, java.sql.Time.valueOf(currentTime));
+                        insertStatement.setTime(4, java.sql.Time.valueOf(slotToTime));
+                        insertStatement.setInt(5, slotStatus);
+
+                        insertStatement.executeUpdate();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean isDayInSchedule(String schedule, int dayOfWeek) {
+        return schedule.contains(String.valueOf(dayOfWeek));
+    }
+}
+
