@@ -15,8 +15,8 @@ public class UserDAL implements UserDAO {
 	private static ArrayList<User> users = new ArrayList<>();
 
 	public UserDAL() {
-		String url = "jdbc:postgresql://192.168.110.48:5432/plf_training";
-		String username = "plf_training_admin";
+		String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
+		String username = "dev";
 		String password = "pff123";
 
 		try {

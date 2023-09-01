@@ -1,6 +1,5 @@
 package base.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import base.daos.DoctorDetailsDAO;
 import base.daos.UserDAO;
-import base.models.Doctor;
+import base.models.AppointmentSchedule;
 import base.models.User;
 import base.models.UserCred;
 
@@ -34,22 +33,31 @@ public class BaseController {
 		String password = userCred.getPassword();
 		User user = userdal.getUserById(userCred.getUsername());
 		if (password.equals(user.getuPass())) {
+			model.addAttribute("doctorsData", doctorddal.getAllDoctorsInfo());
 			return "Doctors";
 		} else {
 			return "wrongCred";
 		}
 	}
 
-	@RequestMapping(value = "/getDoctorsList", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Doctor> last() {
-		return (ArrayList<Doctor>) doctorddal.getAllDoctorsInfo();
+	@RequestMapping(value = "/doctorDetails", method = RequestMethod.GET)
+	public String doctorDetails(@RequestParam("doctorid") int doctorid, Model model) {
+		model.addAttribute("doctor", doctorddal.getDoctorInfoById(doctorid));
+		System.out.println(doctorid);
+		return "DoctorDetails";
 	}
 
 	@RequestMapping(value = "/doctorCalendar", method = RequestMethod.GET)
 	public String doctorCalender(@RequestParam("doctorid") int doctorid, Model model) {
+		model.addAttribute("doctorSchedule", doctorddal.getAppointmentScheduleById(doctorid));
 		System.out.println(doctorid);
 		return "DoctorCalendar";
+	}
+
+	@RequestMapping(value = "/getDoctorSchedule", method = RequestMethod.GET)
+	@ResponseBody
+	public List<AppointmentSchedule> doctorSchedule(@RequestParam("doctorid") int doctorid, Model model) {
+		return doctorddal.getAppointmentScheduleById(doctorid);
 	}
 
 }

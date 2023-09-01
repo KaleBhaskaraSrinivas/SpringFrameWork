@@ -6,6 +6,8 @@ public class Doctor {
 	private String specializationname;
 	private String qualification;
 	private byte experience;
+	private String designation;
+	private String photo;
 
 	public int getDoctorid() {
 		return doctorid;
@@ -45,6 +47,22 @@ public class Doctor {
 
 	public void setSpecializationname(String specializationname) {
 		this.specializationname = specializationname;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 }

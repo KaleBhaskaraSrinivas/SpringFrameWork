@@ -18,6 +18,8 @@ public class DoctorMapper implements RowMapper<Doctor> {
 		doctor.setSpecializationname(resultSet.getString("specializationname"));
 		doctor.setQualification(resultSet.getString("qualification"));
 		doctor.setExperience(resultSet.getByte("experience"));
+		doctor.setDesignation(resultSet.getString("designation"));
+		doctor.setPhoto(resultSet.getString("photo"));
 		return doctor;
 	}
 }
