@@ -34,10 +34,16 @@ public class BaseController {
 		User user = userdal.getUserById(userCred.getUsername());
 		if (password.equals(user.getuPass())) {
 			model.addAttribute("doctorsData", doctorddal.getAllDoctorsInfo());
-			return "Doctors";
+			return "DoctorList";
 		} else {
 			return "wrongCred";
 		}
+	}
+
+	@RequestMapping(value = "/doctorList", method = RequestMethod.GET)
+	public String doctorList(@RequestParam("specialization") String specialization, Model model) {
+		System.out.println(specialization);
+		return "DoctorList";
 	}
 
 	@RequestMapping(value = "/doctorDetails", method = RequestMethod.GET)

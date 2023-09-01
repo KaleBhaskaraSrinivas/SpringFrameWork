@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calendar Layout with Selectable Date Tiles</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        .calendar {
-            margin: 0 auto;
-        }
+<title>Calendar Layout with Selectable Date Tiles</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+.calendar {
+	margin: 0 auto;
+}
 
-        .calendar-day {
-            width: 14.28%; 
-            display: inline-block;
-            text-align: center;
-            padding: 10px 0;
-            cursor: pointer;
-        }
+.calendar-day {
+	width: 14.28%;
+	display: inline-block;
+	text-align: center;
+	padding: 10px;
+	cursor: pointer;
+	border: solid 1px white;
+	border-radius: 6px;
+}
 
-        .available { background-color: #bff5cb; }
-        .not-available { background-color: #d3d3d3; }
+.available {
+	background-color: #bff5cb;
+}
 
-    </style>
+.not-available {
+	background-color: #d3d3d3;
+}
+</style>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="calendar">
-            <div class="calendar-header text-center m-5">
-                <h3 id="currentMonth">July 2023</h3>
-            </div>
-            <div class="calendar-dates m-5">
-            </div>
-            <div class="container-fluid m-5">
-            	<button id="prevMonthBtn" class="btn btn-primary">Previous Month</button>
-                <button id="nextMonthBtn" class="btn btn-primary">Next Month</button>
-            </div>
-        </div>
-        <div class="container-fluid" id="slotDropdown"></div>
-    </div>
+	<div class="container mt-5">
+		<div class="calendar">
+			<div class="calendar-header text-center m-5">
+				<h3 id="currentMonth">July 2023</h3>
+			</div>
+			<div class="calendar-dates m-5"></div>
+		</div>
+		<div class="text-center">
+			<button id="prevMonthBtn" class="btn btn-info">Previous Month</button>
+			<button id="nextMonthBtn" class="btn btn-info">Next Month</button>
+		</div>
+		<div class="container-fluid mt-5">
+			<div class="container-fluid" id="slotDropdown"></div>
+		</div>
+	</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+	<script>
     $(document).ready(function () {
         var slotsData = null;
         const queryString = window.location.search;
