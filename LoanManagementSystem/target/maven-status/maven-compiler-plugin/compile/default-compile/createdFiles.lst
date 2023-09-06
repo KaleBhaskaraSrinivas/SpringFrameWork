@@ -1,0 +1,7 @@
+com\masti\orm\loan\controller\LoanController.class
+com\masti\orm\loan\dao\LoanDAO.class
+com\masti\orm\loan\model\LoanApplicants.class
+com\masti\orm\loan\model\Customers.class
+com\masti\orm\loan\service\LoanService.class
+com\masti\orm\loan\model\LoanApplicantNominees.class
+com\masti\orm\loan\model\LoanInputApplication.class
