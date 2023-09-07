@@ -1,14 +1,12 @@
 package com.masti.orm.loan.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class LoanDAO {
-	
-	@PersistenceContext
-	private EntityManager em;
+import com.masti.orm.loan.model.LoanInputApplication;
 
+@Component
+public interface LoanDAO {
+	public List<LoanInputApplication> getAllLoanApplicants();
 }

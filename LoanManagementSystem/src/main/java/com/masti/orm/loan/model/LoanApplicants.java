@@ -3,48 +3,50 @@ package com.masti.orm.loan.model;
 import java.sql.Date;
 
 public class LoanApplicants {
-	
-	private int lnapid;
-	private int lnapcustid;
+
+	private Integer lnapid;
+	private Integer lnapcustid;
 	private Date lnapapdate;
-	private int lnaplntyid;
+	private Integer lnaplntyid;
 	private double lnapamount;
 	private double lnapemirangefrom;
 	private double lnapemirangeto;
 	private double lnapnomrequested;
-	private int lnapcibilscore;
+	private Integer lnapcibilscore;
 	private String lnapstatus;
 	private String lnapconclusionremarks;
-	private int lnapprocesseduser;
+	private Integer lnapprocesseduser;
 	private Date lnapprocessedDate;
-	
-	
+	private double lnapannualincome;
+	private double lnapdisposalincome;
+
+
 	public LoanApplicants() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getLnapid() {
+	public Integer getLnapid() {
 		return lnapid;
 	}
-	public void setLnapid(int lnapid) {
+	public void setLnapid(Integer lnapid) {
 		this.lnapid = lnapid;
 	}
-	public int getLnapcustid() {
+	public Integer getLnapcustid() {
 		return lnapcustid;
 	}
-	public void setLnapcustid(int lnapcustid) {
+	public void setLnapcustid(Integer lnapcustid) {
 		this.lnapcustid = lnapcustid;
 	}
 	public Date getLnapapdate() {
 		return lnapapdate;
 	}
-	public void setLnapapdate(Date lnapapdate) {
-		this.lnapapdate = lnapapdate;
+	public void setLnapapdate(String lnapapdate) {
+		this.lnapapdate =Date.valueOf( lnapapdate);
 	}
-	public int getLnaplntyid() {
+	public Integer getLnaplntyid() {
 		return lnaplntyid;
 	}
-	public void setLnaplntyid(int lnaplntyid) {
+	public void setLnaplntyid(Integer lnaplntyid) {
 		this.lnaplntyid = lnaplntyid;
 	}
 	public double getLnapamount() {
@@ -71,10 +73,10 @@ public class LoanApplicants {
 	public void setLnapnomrequested(double lnapnomrequested) {
 		this.lnapnomrequested = lnapnomrequested;
 	}
-	public int getLnapcibilscore() {
+	public Integer getLnapcibilscore() {
 		return lnapcibilscore;
 	}
-	public void setLnapcibilscore(int lnapcibilscore) {
+	public void setLnapcibilscore(Integer lnapcibilscore) {
 		this.lnapcibilscore = lnapcibilscore;
 	}
 	public String getLnapstatus() {
@@ -89,19 +91,31 @@ public class LoanApplicants {
 	public void setLnapconclusionremarks(String lnapconclusionremarks) {
 		this.lnapconclusionremarks = lnapconclusionremarks;
 	}
-	public int getLnapprocesseduser() {
+	public Integer getLnapprocesseduser() {
 		return lnapprocesseduser;
 	}
-	public void setLnapprocesseduser(int lnapprocesseduser) {
+	public void setLnapprocesseduser(Integer lnapprocesseduser) {
 		this.lnapprocesseduser = lnapprocesseduser;
 	}
 	public Date getLnapprocessedDate() {
 		return lnapprocessedDate;
 	}
-	public void setLnapprocessedDate(Date lnapprocessedDate) {
-		this.lnapprocessedDate = lnapprocessedDate;
+	public void setLnapprocessedDate(String lnapprocessedDate) {
+		this.lnapprocessedDate =Date.valueOf( lnapprocessedDate);
 	}
-	
-	
-	
+	public double getLnapannualincome() {
+		return lnapannualincome;
+	}
+	public void setLnapannualincome(double lnapannualincome) {
+		this.lnapannualincome = lnapannualincome;
+	}
+	public double getLnapdisposalincome() {
+		return lnapdisposalincome;
+	}
+	public void setLnapdisposalincome(double lnapdisposalincome) {
+		this.lnapdisposalincome = lnapdisposalincome;
+	}
+
+
+
 }

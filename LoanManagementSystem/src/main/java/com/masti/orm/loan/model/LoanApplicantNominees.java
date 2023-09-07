@@ -1,18 +1,18 @@
 package com.masti.orm.loan.model;
 
 public class LoanApplicantNominees {
-	
-	private int lnapid;
-    private String lnapnominee;
-    private String lnaprelation;
+
+	private Integer lnapid;
+	private String lnapnominee;
+	private String lnaprelation;
 	public LoanApplicantNominees() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getLnapid() {
+	public Integer getLnapid() {
 		return lnapid;
 	}
-	public void setLnapid(int lnapid) {
+	public void setLnapid(Integer lnapid) {
 		this.lnapid = lnapid;
 	}
 	public String getLnapnominee() {
@@ -27,7 +27,7 @@ public class LoanApplicantNominees {
 	public void setLnaprelation(String lnaprelation) {
 		this.lnaprelation = lnaprelation;
 	}
-	
-    
+
+
 
 }
